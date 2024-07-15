@@ -1,0 +1,12 @@
+Flask
+requests
+beautifulsoup4
+Faker
+peewee
+fastapi
+uvicorn
+pycbrf
+pytest
+mock
+coverage
+pytest-cov
