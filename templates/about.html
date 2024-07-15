@@ -5,15 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Business Casual - Start Bootstrap Theme</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <title>Результаты запроса</title>
+        <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="/static/css/styles.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header>
@@ -24,19 +24,19 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
             <div class="container">
-                <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="index.html">Start Bootstrap</a>
+                <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="/index">Start Bootstrap</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto">
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="index.html">Главная</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="form.html">Поиск</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/index">Главная</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/form">Поиск</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <section class="page-section about-heading">
             <div class="container">
-                <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="assets/img/about.jpg" alt="..." />
+                <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="/static/assets/img/about.jpg" alt="..." />
                 <div class="about-heading-content">
                     <div class="row">
                         <div class="col-xl-5 col-lg-4 mx-auto">
@@ -46,8 +46,10 @@
                                 </h2>
                                 <h3 class="section-heading">Параметры</h3>
                                 <ol class="list-group">
-                                    <li class="list-group-item">python</li>
-                                    <li class="list-group-item">В названии компании</li>
+                                    <li class="list-group-item" >Вакансия: {{ res['vacancy'] }}</li>
+                                    <li class="list-group-item">Условия: {{ res['where']}}</li>
+                                    <li class="list-group-item">Ср. верхняя граница: {{ res['up'] }}руб.</li>
+                                    <li class="list-group-item">Ср. нижняя граница: {{ res['down'] }}руб.</li>
                                 </ol>
                                 <table class="table">
                                     <thead class="thead-dark">
@@ -58,21 +60,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Python</td>
-                                            <td align="right">86.6%</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>PostgreSQL</td>
-                                            <td align="right">37.7%</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Django</td>
-                                            <td align="right">32.2%</td>
-                                        </tr>
+                                        {% for item in res['requirements'] %}
+                                            <tr>
+                                                <th scope="row">{{ loop.index }} </th>
+                                                <td>{{ item['name'].capitalize() }}</td>
+                                                <td align="right">{{ item['percent'] }}%</td>
+                                            </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
